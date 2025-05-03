@@ -383,7 +383,7 @@
             
             <div class="form-group">
               <label for="productSelect">Seleziona un prodotto</label>
-              <select id="productSelect" name="Prodotto">
+              <select id="productSelect" name="Prodotto" required>
                 <option value="">-- Seleziona un prodotto --</option>
                 <!-- Gli elementi option verranno generati da JavaScript -->
               </select>
@@ -483,263 +483,77 @@
       </div>
     </div>
   </div>
-```
 
-Ecco la seconda parte del codice con lo script JavaScript:
-
-```html
   <script>
-    // Array dei prodotti wedding
-    const weddingProducts = [
-      {
-        "name": "Mini Bonsai Olivo in vaso ceramica Bianco",
-        "price": "0.10",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/mini-bonsai-olivo-in-vaso-ceramica-biancopiantai-giardini-di-giulia-118292_300x300.jpg?v=1742850731"
-      },
-      {
-        "name": "Bonsai Mini Ficus Ginseng in Vaso di Ceramica da 11 cm",
-        "price": "0.14",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-ficus-ginseng-vendita-online-arredamento_300x300.jpg?v=1742845520"
-      },
-      {
-        "name": "Bonsai ficus ginseng in vaso ceramica bianco",
-        "price": "0.14",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/composizionepiantegrasse-194197_300x300.png?v=1742850783"
-      },
-      {
-        "name": "Tradescantia Nanouk in Vaso ceramica Carina",
-        "price": "0.14",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/TradescantiaNanuk_venditapiantedainterno_300x300.jpg?v=1745409067"
-      },
-      {
-        "name": "Terrarium geometrico Kira con piante grasse",
-        "price": "0.17",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/terrarium_geometrico_con_piante_grasse_-_piante_vere_-_bassa_manutenzione_300x300.jpg?v=1745481786"
-      },
-      {
-        "name": "Terrarium geometrico Dalia con piante verdi",
-        "price": "0.17",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR065_300x300.png?v=1744876192"
-      },
-      {
-        "name": "Bonsai Olivo in vaso ceramica Novara",
-        "price": "0.17",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/BonsaiUlivoinvasodiceramicaNovara_vasoinceramica-647231_300x300.png?v=1742850753"
-      },
-      {
-        "name": "Quadro stabilizzato mini tondo bianco",
-        "price": "0.17",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-stabilizzato-mini-bianco-diametro-20-cmquadro-di-verde-stabilizzatoi-giardini-di-giulia-248662_300x300.jpg?v=1742850824"
-      },
-      {
-        "name": "Bonsai ficus ginseng in vaso Dallas",
-        "price": "0.17",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsaificusginsengfacilemanutenzione_3-160412_300x300.jpg?v=1742850792"
-      },
-      {
-        "name": "Bonsai Ficus Ginseng in vaso ceramica Bergamo",
-        "price": "0.18",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/BonsaiGinsenginvasoceramicaBergamo_bonsaidaregalo-562334_300x300.png?v=1742850809"
-      },
-      {
-        "name": "Olivo Bonsai 'Dallas Midi' - Altezza Pianta 40 cm, Vaso di Ceramica Diametro 13 cm",
-        "price": "0.18",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-dallas-midi-vendita-online_300x300.jpg?v=1742844544"
-      },
-      {
-        "name": "Bonsai Olivo  Andromeda",
-        "price": "0.18",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/OlivoBonsaiAndromeda_iGiardinidiGiulia_300x300.jpg?v=1745061609"
-      },
-      {
-        "name": "Terrarium Alessia 058",
-        "price": "0.19",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2tr058_300x300.jpg?v=1744726697"
-      },
-      {
-        "name": "Quadro rettangolare di muschio e licheni stabilizzati",
-        "price": "0.20",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-rettangolare-di-muschio-e-licheni-stabilizzati-muschi-di-medusa-dimensione-145x245quadro-verde-stabilizzatoi-giardini-di-giulia-364069_300x300.jpg?v=1742841705"
-      },
-      {
-        "name": "Quadro tondo nero di muschio e licheni",
-        "price": "0.20",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-tondo-di-muschio-e-licheni-stabilizzati-vero-velia-in-fiore-diametro-20-cmverde-stabilizzatoi-giardini-di-giulia-816682_300x300.jpg?v=1742841760"
-      },
-      {
-        "name": "Olivo Bonsai - Altezza Pianta 40 cm, Vaso di Ceramica 'Bergamo' Diametro 13 cm",
-        "price": "0.20",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-mediterraneo-foglie-argentee_300x300.jpg?v=1742844442"
-      },
-      {
-        "name": "Olivo Bonsai 'Granit' - Altezza Pianta 40 cm, Vaso in Terracotta Diametro 16 cm",
-        "price": "0.20",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/olivo-bonsai-granit-vaso-terracotta_300x300.jpg?v=1742844454"
-      },
-      {
-        "name": "Olivo Bonsai - Altezza Pianta 40 cm, Vaso di Ceramica 'Boston' Diametro 13 cm",
-        "price": "0.21",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-40cm-mediterraneo-interno-esterno_300x300.jpg?v=1742844531"
-      },
-      {
-        "name": "Kokedama Philodendron Birkin - Altezza Pianta 33 cm, Diametro 13,5 cm",
-        "price": "0.23",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-philodendron-birkin-altezza-pianta-33-cm-diametro-135-cmpiantei-giardini-di-giulia-818911_300x300.jpg?v=1742844107"
-      },
-      {
-        "name": "Kokedama Philodendron Red Vein",
-        "price": "0.23",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-philodendron-red-vein-altezza-pianta-33-cm-diametro-135-cmpiantei-giardini-di-giulia-510680_300x300.jpg?v=1742844094"
-      },
-      {
-        "name": "Terrarium Mira 072V",
-        "price": "0.23",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR072V_300x300.jpg?v=1744798894"
-      },
-      {
-        "name": "Orchidea Phalaenopsis - Altezza Pianta 70 cm, Vaso di Ceramica Diametro 13 cm",
-        "price": "0.23",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/orchidea-phalaenopsis-altezza-pianta-70-cm-vaso-di-ceramica-diametro-13-cmpiantei-giardini-di-giulia-321922_300x300.jpg?v=1742844629"
-      },
-      {
-        "name": "Kokedama Bonsai  Olivo",
-        "price": "0.24",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-bonsai-olivopiantei-giardini-di-giulia-654539_300x300.jpg?v=1742844078"
-      },
-      {
-        "name": "Kokedama Bonsai Ficus Ginseng",
-        "price": "0.27",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-bonsai-ficus-ginseng-altezza-50-cm-diametro-17-cmpiantei-giardini-di-giulia-941571_300x300.jpg?v=1742844082"
-      },
-      {
-        "name": "Bonsai Olivo  Puglia Vaso di Ceramica",
-        "price": "0.27",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-decorazione-terrazzo-appartamento_4_300x300.jpg?v=1742845979"
-      },
-      {
-        "name": "Bonsai Ficus Ginseng Novara",
-        "price": "0.29",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/Progettosenzatitolo_5_bb9bf10b-8c7a-4ae3-b2ff-50b53da5a819-118728_300x300.jpg?v=1742844396"
-      },
-      {
-        "name": "Terrarium Diamante 068V",
-        "price": "0.34",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2tr068v_300x300.jpg?v=1744728771"
-      },
-      {
-        "name": "Terrarium Florine 067V",
-        "price": "0.40",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR067V_300x300.png?v=1744794515"
-      },
-      {
-        "name": "Quadro Tondo di verde stabilizzato di muschi e licheni 30 cm.",
-        "price": "0.52",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-tondo-di-verde-stabilizzato-di-muschi-e-licheni-giulias-oasis-di-diametro-30-cmverde-stabilizzatoi-giardini-di-giulia-743575_300x300.jpg?v=1742850467"
-      },
-      {
-        "name": "Terrarium Geometrico con Piante Grasse",
-        "price": "0.56",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR071G_300x300.jpg?v=1744794432"
-      },
-      {
-        "name": "Quadro Rettangolare di Muschio e Licheni Stabilizzati  30x40 cm",
-        "price": "0.60",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-rettangolare-di-muschio-e-licheni-stabilizzati-verde-silenzio-dimensioni-30x40-cmquadro-di-verde-stabilizzatoi-giardini-di-giulia-106784_300x300.jpg?v=1742841688"
-      },
-      {
-        "name": "Terrarium Coraline 002",
-        "price": "0.80",
-        "image": "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/terrariumnuovo_300x300.jpg?v=1744728075"
-      }
+    // Prodotti della collezione wedding
+    const products = [
+      { name: "Mini Bonsai Olivo in vaso ceramica Bianco", price: 9.90, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/mini-bonsai-olivo-in-vaso-ceramica-biancopiantai-giardini-di-giulia-118292_300x300.jpg?v=1742850731" },
+      { name: "Bonsai Mini Ficus Ginseng in Vaso di Ceramica da 11 cm", price: 13.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-ficus-ginseng-vendita-online-arredamento_300x300.jpg?v=1742845520" },
+      { name: "Bonsai ficus ginseng in vaso ceramica bianco", price: 14.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/composizionepiantegrasse-194197_300x300.png?v=1742850783" },
+      { name: "Tradescantia Nanouk in Vaso ceramica Carina", price: 14.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/TradescantiaNanuk_venditapiantedainterno_300x300.jpg?v=1745409067" },
+      { name: "Terrarium geometrico Kira con piante grasse", price: 16.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/terrarium_geometrico_con_piante_grasse_-_piante_vere_-_bassa_manutenzione_300x300.jpg?v=1745481786" },
+      { name: "Terrarium geometrico Dalia con piante verdi", price: 16.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR065_300x300.png?v=1744876192" },
+      { name: "Bonsai Olivo in vaso ceramica Novara", price: 16.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/BonsaiUlivoinvasodiceramicaNovara_vasoinceramica-647231_300x300.png?v=1742850753" },
+      { name: "Quadro stabilizzato mini tondo bianco", price: 16.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-stabilizzato-mini-bianco-diametro-20-cmquadro-di-verde-stabilizzatoi-giardini-di-giulia-248662_300x300.jpg?v=1742850824" },
+      { name: "Bonsai ficus ginseng in vaso Dallas", price: 16.50, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsaificusginsengfacilemanutenzione_3-160412_300x300.jpg?v=1742850792" },
+      { name: "Bonsai Ficus Ginseng in vaso ceramica Bergamo", price: 18.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/BonsaiGinsenginvasoceramicaBergamo_bonsaidaregalo-562334_300x300.png?v=1742850809" },
+      { name: "Olivo Bonsai 'Dallas Midi'", price: 18.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-dallas-midi-vendita-online_300x300.jpg?v=1742844544" },
+      { name: "Bonsai Olivo Andromeda", price: 18.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/OlivoBonsaiAndromeda_iGiardinidiGiulia_300x300.jpg?v=1745061609" },
+      { name: "Terrarium Alessia 058", price: 19.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2tr058_300x300.jpg?v=1744726697" },
+      { name: "Quadro rettangolare di muschio e licheni stabilizzati", price: 20.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-rettangolare-di-muschio-e-licheni-stabilizzati-muschi-di-medusa-dimensione-145x245quadro-verde-stabilizzatoi-giardini-di-giulia-364069_300x300.jpg?v=1742841705" },
+      { name: "Quadro tondo nero di muschio e licheni", price: 20.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-tondo-di-muschio-e-licheni-stabilizzati-vero-velia-in-fiore-diametro-20-cmverde-stabilizzatoi-giardini-di-giulia-816682_300x300.jpg?v=1742841760" },
+      { name: "Olivo Bonsai - Altezza Pianta 40 cm, Vaso di Ceramica 'Bergamo'", price: 20.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-mediterraneo-foglie-argentee_300x300.jpg?v=1742844442" },
+      { name: "Olivo Bonsai 'Granit' - Altezza Pianta 40 cm", price: 20.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/olivo-bonsai-granit-vaso-terracotta_300x300.jpg?v=1742844454" },
+      { name: "Olivo Bonsai - Altezza Pianta 40 cm, Vaso 'Boston'", price: 21.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-40cm-mediterraneo-interno-esterno_300x300.jpg?v=1742844531" },
+      { name: "Kokedama Philodendron Birkin", price: 23.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-philodendron-birkin-altezza-pianta-33-cm-diametro-135-cmpiantei-giardini-di-giulia-818911_300x300.jpg?v=1742844107" },
+      { name: "Kokedama Philodendron Red Vein", price: 23.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-philodendron-red-vein-altezza-pianta-33-cm-diametro-135-cmpiantei-giardini-di-giulia-510680_300x300.jpg?v=1742844094" },
+      { name: "Terrarium Mira 072V", price: 23.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR072V_300x300.jpg?v=1744798894" },
+      { name: "Orchidea Phalaenopsis", price: 23.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/orchidea-phalaenopsis-altezza-pianta-70-cm-vaso-di-ceramica-diametro-13-cmpiantei-giardini-di-giulia-321922_300x300.jpg?v=1742844629" },
+      { name: "Kokedama Bonsai Olivo", price: 24.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-bonsai-olivopiantei-giardini-di-giulia-654539_300x300.jpg?v=1742844078" },
+      { name: "Kokedama Bonsai Ficus Ginseng", price: 27.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/kokedama-bonsai-ficus-ginseng-altezza-50-cm-diametro-17-cmpiantei-giardini-di-giulia-941571_300x300.jpg?v=1742844082" },
+      { name: "Bonsai Olivo Puglia Vaso di Ceramica", price: 27.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/bonsai-olivo-decorazione-terrazzo-appartamento_4_300x300.jpg?v=1742845979" },
+      { name: "Bonsai Ficus Ginseng Novara", price: 29.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/Progettosenzatitolo_5_bb9bf10b-8c7a-4ae3-b2ff-50b53da5a819-118728_300x300.jpg?v=1742844396" },
+      { name: "Terrarium Diamante 068V", price: 34.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2tr068v_300x300.jpg?v=1744728771" },
+      { name: "Terrarium Florine 067V", price: 40.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR067V_300x300.png?v=1744794515" },
+      { name: "Quadro Tondo di verde stabilizzato 30 cm", price: 52.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-tondo-di-verde-stabilizzato-di-muschi-e-licheni-giulias-oasis-di-diametro-30-cmverde-stabilizzatoi-giardini-di-giulia-743575_300x300.jpg?v=1742850467" },
+      { name: "Terrarium Geometrico con Piante Grasse", price: 56.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/2TR071G_300x300.jpg?v=1744794432" },
+      { name: "Quadro Rettangolare di Muschio e Licheni 30x40 cm", price: 60.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/quadro-rettangolare-di-muschio-e-licheni-stabilizzati-verde-silenzio-dimensioni-30x40-cmquadro-di-verde-stabilizzatoi-giardini-di-giulia-106784_300x300.jpg?v=1742841688" },
+      { name: "Terrarium Coraline 002", price: 80.00, image: "https://cdn.shopify.com/s/files/1/0793/6042/6326/files/terrariumnuovo_300x300.jpg?v=1744728075" }
     ];
     
     document.addEventListener('DOMContentLoaded', function() {
-      // Popola il menu a tendina dei prodotti
-      populateProductOptions();
-      
       // Elementi DOM
-      const weddingForm = document.getElementById('weddingForm');
       const productSelect = document.getElementById('productSelect');
       const quantity = document.getElementById('quantity');
       const unitPrice = document.getElementById('unitPrice');
       const subtotalPrice = document.getElementById('subtotalPrice');
       const packagingCost = document.getElementById('packagingCost');
       const totalPrice = document.getElementById('totalPrice');
+      const unitPriceHidden = document.getElementById('unitPriceHidden');
+      const subtotalHidden = document.getElementById('subtotalHidden');
+      const packagingHidden = document.getElementById('packagingHidden');
+      const totalHidden = document.getElementById('totalHidden');
+      const weddingForm = document.getElementById('weddingForm');
+      const successMessage = document.getElementById('successMessage');
+      const newQuoteBtn = document.getElementById('newQuoteBtn');
+      const buyNowBtn = document.getElementById('buyNowBtn');
       const productError = document.getElementById('productError');
       const quantityError = document.getElementById('quantityError');
       const productPreview = document.getElementById('productPreview');
       const productImage = document.getElementById('productImage');
       const productTitle = document.getElementById('productTitle');
       const productPriceEl = document.getElementById('productPrice');
-      const successMessage = document.getElementById('successMessage');
-      const newQuoteBtn = document.getElementById('newQuoteBtn');
-      const buyNowBtn = document.getElementById('buyNowBtn');
       
-      // Hidden fields for form submission
-      const unitPriceHidden = document.getElementById('unitPriceHidden');
-      const subtotalHidden = document.getElementById('subtotalHidden');
-      const packagingHidden = document.getElementById('packagingHidden');
-      const totalHidden = document.getElementById('totalHidden');
-      
-      // Format price function
-      function formatPrice(price) {
-        return '€' + parseFloat(price).toFixed(2).replace('.', ',');
-      }
-      
-      // Funzione per popolare il menu a tendina dei prodotti
-      function populateProductOptions() {
-        // Raggruppa i prodotti per tipo
-        const productsByType = {};
-        weddingProducts.forEach(product => {
-          // Identifica il tipo di prodotto dal nome
-          let type = 'Altri prodotti';
-          if (product.name.toLowerCase().includes('bonsai')) {
-            type = 'Bonsai';
-          } else if (product.name.toLowerCase().includes('terrarium')) {
-            type = 'Terrarium';
-          } else if (product.name.toLowerCase().includes('kokedama')) {
-            type = 'Kokedama';
-          } else if (product.name.toLowerCase().includes('quadro') || 
-                     product.name.toLowerCase().includes('stabilizzat')) {
-            type = 'Verde Stabilizzato';
-          }
-          
-          if (!productsByType[type]) {
-            productsByType[type] = [];
-          }
-          productsByType[type].push(product);
-        });
-        
-        // Ordina le categorie
-        const orderedCategories = ['Bonsai', 'Kokedama', 'Terrarium', 'Verde Stabilizzato', 'Altri prodotti'];
-        
-        // Popola il menu a tendina con le categorie e i prodotti
-        orderedCategories.forEach(category => {
-          if (productsByType[category] && productsByType[category].length > 0) {
-            // Crea il gruppo per la categoria
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = category;
-            
-            // Ordina i prodotti per nome
-            productsByType[category].sort((a, b) => a.name.localeCompare(b.name));
-            
-            // Aggiungi i prodotti al gruppo
-            productsByType[category].forEach(product => {
-              const option = document.createElement('option');
-              option.value = product.name;
-              option.dataset.price = product.price;
-              option.dataset.image = product.image;
-              option.textContent = `${product.name} - €${parseFloat(product.price * 100).toFixed(2)}`;
-              optgroup.appendChild(option);
-            });
-            
-            // Aggiungi il gruppo al menu a tendina
-            productSelect.appendChild(optgroup);
-          }
-        });
-      }
-      
-      // Calculate quote
+      // Popola il menu a tendina dei prodotti
+      products.forEach(function(product) {
+        const option = document.createElement('option');
+        option.value = product.name;
+        option.dataset.price = product.price;
+        option.dataset.image = product.image;
+        option.textContent = product.name + ' - €' + product.price.toFixed(2);
+        productSelect.appendChild(option);
+      });
+            // Calcola preventivo
       function calculateQuote() {
         const selectedOption = productSelect.options[productSelect.selectedIndex];
         
@@ -748,54 +562,48 @@ Ecco la seconda parte del codice con lo script JavaScript:
           subtotalPrice.textContent = '€0,00';
           packagingCost.textContent = '€0,00';
           totalPrice.textContent = '€0,00';
-          
-          unitPriceHidden.value = '';
-          subtotalHidden.value = '';
-          packagingHidden.value = '';
-          totalHidden.value = '';
           return;
         }
         
-        // Moltiplichiamo per 100 perché i prezzi sono stati inseriti come cifre decimali ma sono in realtà centesimi
-        const productPrice = parseFloat(selectedOption.dataset.price) * 100;
-        const quantityValue = parseInt(quantity.value, 10);
+        const productPrice = parseFloat(selectedOption.dataset.price);
+        const quantityValue = parseInt(quantity.value);
         
         if (isNaN(productPrice) || isNaN(quantityValue) || quantityValue < 1) {
           return;
         }
         
-        // Calculate packaging price based on quantity
-        let packagingPrice = 0;
+        // Calcola prezzo packaging
+        let packagingUnitPrice = 0;
         if (quantityValue >= 7) {
           if (quantityValue <= 20) {
-            packagingPrice = 7.50;
+            packagingUnitPrice = 7.50;
           } else if (quantityValue <= 30) {
-            packagingPrice = 6.50;
+            packagingUnitPrice = 6.50;
           } else if (quantityValue <= 50) {
-            packagingPrice = 5.50;
+            packagingUnitPrice = 5.50;
           } else if (quantityValue <= 100) {
-            packagingPrice = 4.00;
+            packagingUnitPrice = 4.00;
           }
         }
         
         const subtotal = productPrice * quantityValue;
-        const packaging = packagingPrice * quantityValue;
+        const packaging = packagingUnitPrice * quantityValue;
         const total = subtotal + packaging;
         
-        // Update visible elements
-        unitPrice.textContent = formatPrice(productPrice);
-        subtotalPrice.textContent = formatPrice(subtotal);
-        packagingCost.textContent = formatPrice(packaging);
-        totalPrice.textContent = formatPrice(total);
+        // Aggiorna elementi visibili
+        unitPrice.textContent = '€' + productPrice.toFixed(2).replace('.', ',');
+        subtotalPrice.textContent = '€' + subtotal.toFixed(2).replace('.', ',');
+        packagingCost.textContent = '€' + packaging.toFixed(2).replace('.', ',');
+        totalPrice.textContent = '€' + total.toFixed(2).replace('.', ',');
         
-        // Update hidden fields
-        unitPriceHidden.value = formatPrice(productPrice);
-        subtotalHidden.value = formatPrice(subtotal);
-        packagingHidden.value = formatPrice(packaging);
-        totalHidden.value = formatPrice(total);
+        // Aggiorna campi nascosti
+        unitPriceHidden.value = '€' + productPrice.toFixed(2).replace('.', ',');
+        subtotalHidden.value = '€' + subtotal.toFixed(2).replace('.', ',');
+        packagingHidden.value = '€' + packaging.toFixed(2).replace('.', ',');
+        totalHidden.value = '€' + total.toFixed(2).replace('.', ',');
       }
       
-      // Update product preview
+      // Aggiorna anteprima prodotto
       function updateProductPreview() {
         const selectedOption = productSelect.options[productSelect.selectedIndex];
         
@@ -898,7 +706,7 @@ Ecco la seconda parte del codice con lo script JavaScript:
         weddingForm.style.display = 'block';
       });
       
-      // Initialize
+      // Inizializza
       calculateQuote();
     });
   </script>
