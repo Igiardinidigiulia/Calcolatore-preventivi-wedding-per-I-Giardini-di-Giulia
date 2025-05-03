@@ -672,18 +672,118 @@
         }, 1000);
       });
       
-      // Buy now button
-      buyNowBtn.addEventListener('click', function() {
-        // Validate
-        if (!productSelect.value) {
-          productError.style.display = 'block';
-          return;
-        }
-        
-        if (parseInt(quantity.value) < 7) {
-          quantityError.style.display = 'block';
-          return;
-        }
+// Buy now button
+buyNowBtn.addEventListener('click', function() {
+  // Validate
+  if (!productSelect.value) {
+    productError.style.display = 'block';
+    return;
+  }
+  
+  const quantityValue = parseInt(quantity.value, 10);
+  if (quantityValue < 7) {
+    quantityError.style.display = 'block';
+    return;
+  }
+  
+  // Trova il prodotto selezionato nell'array products
+  const productName = productSelect.value;
+  const selectedOption = productSelect.options[productSelect.selectedIndex];
+  const productPrice = parseFloat(selectedOption.dataset.price);
+  
+  // Determina quale prodotto di packaging cercare in base alla quantità
+  let packagingTitle;
+  
+  if (quantityValue <= 20) {
+    packagingTitle = "PACKAGING 7-20";
+  } else if (quantityValue <= 30) {
+    packagingTitle = "PACKAGING 21-30";
+  } else if (quantityValue <= 50) {
+    packagingTitle = "PACKAGING 31-50";
+  } else {
+    packagingTitle = "PACKAGING 51-100";
+  }
+  
+  // Mostra indicatore di caricamento
+  buyNowBtn.disabled = true;
+  buyNowBtn.innerHTML = '<span class="section-icon">⏳</span> Aggiunta al carrello...';
+  
+  // Carica i prodotti della collezione packaging
+  fetch('/products.json?collection_id=648532820310') // ID della collezione packaging
+    .then(response => response.json())
+    .then(packagingData => {
+      // Trova il prodotto packaging corrispondente
+      const packagingProduct = packagingData.products.find(product => product.title === packagingTitle);
+      
+      if (!packagingProduct) {
+        throw new Error('Packaging non trovato: ' + packagingTitle);
+      }
+      
+      // Ottieni il variant ID del packaging
+      const packagingVariantId = packagingProduct.variants[0].id;
+      
+      // Ora carichiamo i prodotti wedding per trovare il prodotto selezionato
+      return fetch('/products.json?collection_id=621510558038') // ID della collezione wedding
+        .then(response => response.json())
+        .then(weddingData => {
+          // Trova il prodotto wedding corrispondente al nome selezionato
+          const selectedProduct = weddingData.products.find(product => product.title === productName);
+          
+          if (!selectedProduct) {
+            throw new Error('Prodotto non trovato');
+          }
+          
+          // Ottieni il variant ID del prodotto selezionato
+          const productVariantId = selectedProduct.variants[0].id;
+          
+          // Aggiungi al carrello sia il prodotto che il packaging
+          return fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              items: [
+                {
+                  id: productVariantId,
+                  quantity: quantityValue,
+                  properties: {
+                    "Con packaging personalizzato": "Sì"
+                  }
+                },
+                {
+                  id: packagingVariantId,
+                  quantity: quantityValue,
+                  properties: {
+                    "Per prodotto": productName,
+                    "Quantità associata": quantityValue + " pezzi"
+                  }
+                }
+              ]
+            })
+          });
+        });
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Redirect al carrello dopo l'aggiunta
+      window.location.href = '/cart';
+    })
+    .catch(error => {
+      console.error('Errore durante l\'aggiunta al carrello:', error);
+      alert('Si è verificato un errore durante l\'aggiunta al carrello. Riprova.');
+      
+      // Ripristina il pulsante
+      buyNowBtn.disabled = false;
+      buyNowBtn.innerHTML = '<span class="section-icon">🛒</span> Acquista ora';
+    });
+});
+
         
         // Redirect to the collection page
         window.parent.location.href = 'https://igiardinidigiulia.it/collections/bomboniere-green-per-matrimoni-ed-eventi-i-giardini-di-giulia';
